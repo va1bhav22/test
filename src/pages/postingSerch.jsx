@@ -5,7 +5,7 @@ import { getAllPosts, searchPosts } from "../redux/actions/postActions";
 
 const Posts = () => {
   const dispatch = useDispatch();
-  const { posts, loading, error } = useSelector((state) => state.post);
+  const { posts, loading } = useSelector((state) => state.post);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {

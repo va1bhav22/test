@@ -2,14 +2,15 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { signUpAuth } from "../redux/actions/authActions";
-
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
       await dispatch(signUpAuth(values));
       setSubmitting(false);
+      navigate("/");
     } catch (error) {
       setSubmitting(false);
       if (error.response && error.response.data && error.response.data.errors) {
@@ -27,7 +28,10 @@ const Signup = () => {
         initialValues={{ username: "", email: "", password: "" }}
         validate={(values) => {
           const errors = {};
-          if (!values.username) {
+          if (!values.firstName) {
+            errors.username = "Required";
+          }
+          if (!values.lastName) {
             errors.username = "Required";
           }
           if (!values.email) {
@@ -47,8 +51,12 @@ const Signup = () => {
         {({ isSubmitting }) => (
           <Form>
             <div>
-              <Field type="text" name="username" placeholder="Username" />
-              <ErrorMessage name="username" component="div" />
+              <Field type="text" name="firstName" placeholder="first Name" />
+              <ErrorMessage name="firstName" component="div" />
+            </div>
+            <div>
+              <Field type="text" name="lastName" placeholder="last Name" />
+              <ErrorMessage name="lastName" component="div" />
             </div>
             <div>
               <Field type="email" name="email" placeholder="Email" />

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from "react-hot-toast";
 export const signUpRequest = () => ({
   type: "SIGNUP_REQUEST",
 });
@@ -20,12 +20,14 @@ export const signUpAuth = (userData) => {
     dispatch(signUpRequest());
     try {
       await axios.post(
-        "http://192.168.36.238:3000/api/v1/user/sign-up",
+        "https://kennect-backend-9yvy.onrender.com/api/v1/user/sign-up",
         userData
       );
       dispatch(signUpSuccess());
+      toast.success("signup Success");
     } catch (error) {
       dispatch(signUpFailure(error));
+      toast.error("signup fail");
       throw error;
     }
   };

@@ -15,6 +15,20 @@ export const getAllPostsFailure = (error) => ({
   payload: error,
 });
 
+export const searchPostsRequest = () => ({
+  type: "SEARCH_POSTS_REQUEST",
+});
+
+export const searchPostsSuccess = (posts) => ({
+  type: "SEARCH_POSTS_SUCCESS",
+  payload: posts,
+});
+
+export const searchPostsFailure = (error) => ({
+  type: "SEARCH_POSTS_FAILURE",
+  payload: error,
+});
+
 export const getAllPosts = () => {
   return async (dispatch) => {
     dispatch(getAllPostsRequest());
@@ -31,14 +45,18 @@ export const getAllPosts = () => {
 
 export const searchPosts = (query) => {
   return async (dispatch) => {
-    dispatch(getAllPostsRequest());
+    dispatch(searchPostsRequest());
     try {
       const response = await axios.get(
         `https://kennect-backend-9yvy.onrender.com/api/v1/post/get-all-post?search=${query}`
       );
-      dispatch(getAllPostsSuccess(response.data));
+      if (response.data.length === 0) {
+        dispatch(searchPostsFailure({ message: "No results found" }));
+      } else {
+        dispatch(searchPostsSuccess(response.data));
+      }
     } catch (error) {
-      dispatch(getAllPostsFailure(error));
+      dispatch(searchPostsFailure(error));
     }
   };
 };

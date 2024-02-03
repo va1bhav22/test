@@ -1,37 +1,32 @@
 const initialState = {
-  posts: [],
+  userDetails: null,
   loading: false,
   error: null,
 };
 
-const postReducer = (state = initialState, action) => {
+const userDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_ALL_POSTS_REQUEST":
-    case "SEARCH_POSTS_REQUEST":
+    case "GET_USER_DETAILS_REQUEST":
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case "GET_ALL_POSTS_SUCCESS":
-    case "SEARCH_POSTS_SUCCESS":
+    case "GET_USER_DETAILS_SUCCESS":
       return {
         ...state,
-        posts: action.payload,
         loading: false,
-        error: null,
+        userDetails: action.payload,
       };
-    case "GET_ALL_POSTS_FAILURE":
-    case "SEARCH_POSTS_FAILURE":
+    case "GET_USER_DETAILS_FAILURE":
       return {
         ...state,
         loading: false,
         error: action.payload,
-        posts: [],
       };
     default:
       return state;
   }
 };
 
-export default postReducer;
+export default userDetailsReducer;

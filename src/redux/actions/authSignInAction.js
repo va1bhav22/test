@@ -17,13 +17,16 @@ export const authSignIn = (userData) => {
   return async (dispatch) => {
     dispatch(signInRequest());
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://kennect-backend-9yvy.onrender.com/api/v1/user/sign-in",
         userData
       );
 
       dispatch(signInSuccess());
-      dispatch(showAlert("Sign in success!"));
+      const accessToken = response.data?.data?.token;
+      dispatch(setAccessToken(accessToken)); // Dispatch action to set access token in local storage
+
+      // dispatch(showAlert("Sign in success!"));
       toast.success("login Success");
     } catch (error) {
       dispatch(signInFailure(error));
@@ -32,8 +35,8 @@ export const authSignIn = (userData) => {
     }
   };
 };
-
-export const showAlert = (message) => ({
-  type: "SHOW_ALERT",
-  payload: message,
-});
+export const setAccessToken = (accessToken) => {
+  return () => {
+    localStorage.setItem("accessToken", accessToken);
+  };
+};

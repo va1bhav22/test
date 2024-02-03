@@ -6,6 +6,7 @@ import Posts from "./pages/Posts";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Toaster } from "react-hot-toast";
+import SearchPosts from "./pages/postingSerch";
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/posts" element={<Posts />} />
+            <Route path="/search" element={<SearchPosts />} />
           </Routes>
         </BrowserRouter>
       </Provider>

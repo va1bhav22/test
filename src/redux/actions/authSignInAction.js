@@ -17,7 +17,10 @@ export const authSignIn = (userData) => {
   return async (dispatch) => {
     dispatch(signInRequest());
     try {
-      await axios.post("/api/signin", userData);
+      await axios.post(
+        "https://kennect-backend-9yvy.onrender.com/api/v1/user/sign-in",
+        userData
+      );
 
       dispatch(signInSuccess());
       dispatch(showAlert("Sign in success!"));

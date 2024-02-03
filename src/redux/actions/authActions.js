@@ -13,12 +13,14 @@ export const signUpFailure = (error) => ({
   payload: error,
 });
 
+// https://kennect-backend-9yvy.onrender.com/api/v1/user/sign-up
+
 export const signUpAuth = (userData) => {
   return async (dispatch) => {
     dispatch(signUpRequest());
     try {
       await axios.post(
-        "https://kennect-backend-9yvy.onrender.com/api/v1/user/sign-up",
+        "http://192.168.36.238:3000/api/v1/user/sign-up",
         userData
       );
       dispatch(signUpSuccess());

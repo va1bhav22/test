@@ -18,7 +18,7 @@ export const authSignIn = (userData) => {
     dispatch(signInRequest());
     try {
       await axios.post(
-        "https://kennect-backend-9yvy.onrender.com/api/v1/user/sign-in",
+        "http://192.168.36.238:3000/api/v1/user/sign-in",
         userData
       );
 

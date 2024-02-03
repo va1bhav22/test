@@ -24,8 +24,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div>
-      <h2>Sign In</h2>
+    <div className="">
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={(values) => {
@@ -45,17 +44,52 @@ const SignInForm = () => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form>
-            <div>
-              <Field type="email" name="email" placeholder="Email" />
-              <ErrorMessage name="email" component="div" />
+          <Form className="max-w-md mx-auto bg-white shadow-md rounded px-8 py-8">
+            <h2 className="text-2xl font-semibold mb-6 px-3">Sign In</h2>
+            <div className="mb-6">
+              <label
+                htmlFor="email"
+                className="block text-gray-700 font-semibold mb-2"
+              >
+                Email
+              </label>
+              <Field
+                type="email"
+                name="email"
+                placeholder="Email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="text-red-500 text-xs mt-1"
+              />
             </div>
-            <div>
-              <Field type="password" name="password" placeholder="Password" />
-              <ErrorMessage name="password" component="div" />
+            <div className="mb-6">
+              <label
+                htmlFor="password"
+                className="block text-gray-700 font-semibold mb-2"
+              >
+                Password
+              </label>
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-500 text-xs mt-1"
+              />
             </div>
-            <button type="submit" disabled={isSubmitting}>
-              Sign In
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {isSubmitting ? "Signing In..." : "Sign In"}
             </button>
           </Form>
         )}

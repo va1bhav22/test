@@ -15,12 +15,11 @@ export const createPostFailure = (error) => ({
 const accessToken = localStorage.getItem("accessToken");
 
 export const createPost = (postData) => {
-  //   console.log("adksahdjk==>", postData);
   return async (dispatch) => {
     dispatch(createPostRequest());
     try {
       await axios.post(
-        "https://kennect-backend-9yvy.onrender.com/api/v1/post/create-user",
+        "https://kennect-backend-9yvy.onrender.com/api/v1/post/create-post",
         postData,
         {
           headers: {

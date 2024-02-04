@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Dialog } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createPost } from "../redux/actions/createPostAction";
 const CreatePost = ({ open, onClose }) => {
   const dispatch = useDispatch();

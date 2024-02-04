@@ -24,9 +24,8 @@ export const authSignIn = (userData) => {
 
       dispatch(signInSuccess());
       const accessToken = response.data?.data?.token;
-      dispatch(setAccessToken(accessToken)); // Dispatch action to set access token in local storage
+      dispatch(setAccessToken(accessToken));
 
-      // dispatch(showAlert("Sign in success!"));
       toast.success("login Success");
     } catch (error) {
       dispatch(signInFailure(error));

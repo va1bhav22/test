@@ -9,14 +9,16 @@ import {
   searchComments,
 } from "../redux/actions/commentDataAction";
 import CreatePost from "../components/CreatePost";
+import Avatar from "@mui/material/Avatar";
+import dayjs from "dayjs";
 const Posts = () => {
   const dispatch = useDispatch();
-  const { posts, loading, error } = useSelector((state) => state.post);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchError, setSearchError] = useState(null);
   const [commentInput, setCommentInput] = useState("");
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const { posts, loading, error } = useSelector((state) => state.post);
   useEffect(() => {
     dispatch(getAllPosts());
   }, [dispatch]);
@@ -48,6 +50,12 @@ const Posts = () => {
   const CloseModel = () => {
     setOpen(false);
   };
+
+  const { userDetails } = useSelector((state) => state?.user);
+
+  useEffect(() => {
+    dispatch(getUserDetails());
+  }, []);
 
   return (
     <div className=" ">
@@ -86,14 +94,20 @@ const Posts = () => {
               <div className="grid grid-rows-3 px-4 py-5">
                 <div>
                   <div className="flex items-center gap-2">
-                    <img
+                    {/* <img
                       src="https://lh4.googleusercontent.com/pzcL7G25jch7H0Vpgm9NvY_C47dcs2jBCJ0rcTApLLOhOBgQ1M7zLyq3qCAJT3HLkuPq_6CECXpVtCmK8-6PA0lXDNAtPTixHiZahoomXOmEfxzMFs-REzysEaJ5tPaRAH0wtFclD1HD_cHC9c-5-q4"
                       alt="profile"
                       className="w-16 rounded-full"
-                    />
+                    /> */}
+                    <Avatar>{userDetails?.data?.firstName?.[0]}</Avatar>
                     <div>
-                      <p className="font-semibold">Anand Kushwaha</p>
-                      <p className="text-sm text-gray-400">12 minutes ago</p>
+                      <p className="font-semibold">
+                        {userDetails?.data?.firstName}{" "}
+                        {userDetails?.data?.lastName}
+                      </p>
+                      <p className="text-sm text-gray-400">
+                        {dayjs(item?.createdAt).format("MMMM D, YYYY h:mm A")}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -102,11 +116,12 @@ const Posts = () => {
                 </div>
                 <div className="flex  justify-between items-center">
                   <div className="flex gap-5 items-center  w-full">
-                    <img
+                    {/* <img
                       src="https://lh4.googleusercontent.com/pzcL7G25jch7H0Vpgm9NvY_C47dcs2jBCJ0rcTApLLOhOBgQ1M7zLyq3qCAJT3HLkuPq_6CECXpVtCmK8-6PA0lXDNAtPTixHiZahoomXOmEfxzMFs-REzysEaJ5tPaRAH0wtFclD1HD_cHC9c-5-q4"
                       alt="profile image"
                       className="w-14 rounded-full border"
-                    />
+                    /> */}
+                    <Avatar>{userDetails?.data?.firstName?.[0]}</Avatar>
                     <input
                       type="text"
                       placeholder="Write your Comment"
@@ -151,7 +166,7 @@ const Posts = () => {
                   </div>
                 </div>
 
-                <Comment />
+                <Comment post={item?.Comment} />
               </div>
             </div>
           ))}

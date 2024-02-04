@@ -37,7 +37,7 @@
 
 import axios from "axios";
 const accessToken = localStorage.getItem("accessToken");
-console.log("accessToken==>", accessToken);
+// console.log("accessToken==>", accessToken);
 export const getUserDetailsRequest = () => ({
   type: "GET_USER_DETAILS_REQUEST",
 });
@@ -65,6 +65,7 @@ export const getUserDetails = () => {
         }
       );
       dispatch(getUserDetailsSuccess(response.data));
+      // return response?.data;
     } catch (error) {
       dispatch(getUserDetailsFailure(error));
     }
